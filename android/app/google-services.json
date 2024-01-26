@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "644371332922",
+    "project_id": "clone-a1a2e",
+    "storage_bucket": "clone-a1a2e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644371332922:android:34d3ed86ce726b6e62da03",
+        "android_client_info": {
+          "package_name": "rohan.app.amazon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChmk8CPKX2Dy_fORwGLa-mf3CXqDJNenE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
