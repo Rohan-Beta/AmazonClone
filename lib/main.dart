@@ -1,6 +1,11 @@
+import 'package:amazon/provider/internet_provider.dart';
+import 'package:amazon/provider/sign_in_provider.dart';
+import 'package:amazon/screens/login_screen.dart';
+import 'package:amazon/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,12 +32,18 @@ class AmazonClone extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: "Amazon Clone",
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: SafeArea(
-          child: Center(child: Text("Hello World")),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => SignInProvider()),
+        ChangeNotifierProvider(create: (context) => InternetProvider()),
+      ],
+      child: const MaterialApp(
+        title: "Amazon Clone",
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          body: SafeArea(
+            child: LogInScreen(),
+          ),
         ),
       ),
     );
