@@ -2,7 +2,6 @@ import 'package:amazon/screens/phoneAuth_screen.dart';
 import 'package:amazon/utilss/next_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:amazon/utilss/screen_size.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
@@ -27,24 +26,21 @@ class _LogInScreenState extends State<LogInScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Flexible(
+              Flexible(
                 flex: 2,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image(
-                      image: NetworkImage(
-                          "https://miro.medium.com/v2/resize:fit:500/1*Q7TzUZZ9bOZO7rQsbc6IGg.png"),
-                      height: 100,
-                      width: 100,
-                      fit: BoxFit.cover,
+                      image: const AssetImage("MyAssets/login.png"),
+                      height: 80,
+                      width: screenSize.width * 0.60,
+                      fit: BoxFit.fill,
                     ),
                   ],
                 ),
               ),
-
-              // phone
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -52,10 +48,13 @@ class _LogInScreenState extends State<LogInScreen> {
                   Padding(
                     padding: const EdgeInsets.only(
                         bottom: 20, left: 40, right: 40, top: 30),
+
+                    // phone
+
                     child: RoundedLoadingButton(
                       controller: phoneController,
-                      successColor: Colors.black,
-                      color: Colors.black,
+                      successColor: Colors.yellow,
+                      color: Colors.yellow,
                       width: screenSize.width * 0.80,
                       onPressed: () {
                         nextScreen(context, const PhoneAuthScreen());
@@ -66,7 +65,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           Icon(
                             FontAwesomeIcons.phone,
                             size: 20,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                           SizedBox(
                             width: 15,
@@ -76,7 +75,7 @@ class _LogInScreenState extends State<LogInScreen> {
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w500,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                           ),
                         ],
