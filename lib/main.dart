@@ -1,7 +1,6 @@
 import 'package:amazon/provider/internet_provider.dart';
 import 'package:amazon/provider/sign_in_provider.dart';
 import 'package:amazon/screens/home_screen.dart';
-import 'package:amazon/screens/login_screen.dart';
 import 'package:amazon/screens/phoneAuth_screen.dart';
 import 'package:amazon/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -44,7 +43,7 @@ class AmazonClone extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           body: SafeArea(
-            child: MySplashScreen(),
+            child: HomeScreen(),
           ),
         ),
       ),

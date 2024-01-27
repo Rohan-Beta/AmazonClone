@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:amazon/Mythemes/color_theme.dart';
 import 'package:amazon/provider/internet_provider.dart';
 import 'package:amazon/provider/sign_in_provider.dart';
 import 'package:amazon/screens/home_screen.dart';
@@ -37,7 +38,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
         child: Scaffold(
           appBar: AppBar(
             title: const Text("Amazon Clone"),
-            backgroundColor: Colors.white,
+            backgroundColor: backgroundColor,
             leading: IconButton(
               icon: const Icon(
                 Icons.arrow_back_ios,
