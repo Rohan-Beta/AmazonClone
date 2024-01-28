@@ -2,17 +2,25 @@ import 'package:amazon/Mythemes/color_theme.dart';
 import 'package:amazon/utilss/screen_size.dart';
 import 'package:flutter/material.dart';
 
-class ProductListView extends StatelessWidget {
+class ProductsView extends StatefulWidget {
   final String title;
   final List<Widget> children;
 
-  const ProductListView(
-      {super.key, required this.title, required this.children});
+  const ProductsView({
+    super.key,
+    required this.title,
+    required this.children,
+  });
 
+  @override
+  State<ProductsView> createState() => _ProductsViewState();
+}
+
+class _ProductsViewState extends State<ProductsView> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MyScreenSize().getScreenSize();
-    double height = screenSize.height / 4;
+    double height = screenSize.width * 0.4;
     double titleHeight = 25;
 
     return Container(
@@ -20,7 +28,8 @@ class ProductListView extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       height: height,
       width: screenSize.width,
-      color: Colors.white,
+      color: Colors.transparent,
+      // color: Colors.white,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -30,7 +39,7 @@ class ProductListView extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  title,
+                  widget.title,
                   style: const TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
@@ -51,7 +60,7 @@ class ProductListView extends StatelessWidget {
             width: screenSize.width,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              children: children,
+              children: widget.children,
             ),
           )
         ],

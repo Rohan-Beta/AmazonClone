@@ -1,10 +1,12 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:amazon/Mythemes/color_theme.dart';
 import 'package:amazon/provider/sign_in_provider.dart';
 import 'package:amazon/utilss/screen_size.dart';
 import 'package:amazon/widget/banner_add.dart';
 import 'package:amazon/widget/horizontal_catalog_view.dart';
+import 'package:amazon/widget/product_view.dart';
+import 'package:amazon/widget/sample_product.dart';
 import 'package:amazon/widget/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -44,7 +46,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           left: 20, right: 10, bottom: 4, top: 4),
                       child: Icon(Icons.location_history_outlined),
                     ),
-                    Text("${sp.address}"),
+                    Text(
+                      "${sp.address}",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ],
                 ),
               ),
@@ -53,6 +59,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: HorizontalCatalogView(),
               ),
               BannerAdd(),
+              ProductsView(title: "Upto 70% off", children: [
+                SampleProduct(
+                    url:
+                        "https://m.media-amazon.com/images/I/51QISbJp5-L._SX3000_.jpg"),
+                SampleProduct(
+                    url:
+                        "https://m.media-amazon.com/images/I/51QISbJp5-L._SX3000_.jpg")
+              ]),
+              ProductsView(title: "Upto 50% off", children: []),
+              ProductsView(title: "Upto 30% off", children: []),
+              ProductsView(title: "Explore", children: []),
             ],
           ),
         ),
