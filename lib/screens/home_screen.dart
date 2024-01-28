@@ -3,6 +3,7 @@
 import 'package:amazon/Mythemes/color_theme.dart';
 import 'package:amazon/provider/sign_in_provider.dart';
 import 'package:amazon/utilss/screen_size.dart';
+import 'package:amazon/widget/banner_add.dart';
 import 'package:amazon/widget/horizontal_catalog_view.dart';
 import 'package:amazon/widget/search_bar.dart';
 import 'package:flutter/material.dart';
@@ -51,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 90,
                 child: HorizontalCatalogView(),
               ),
+              BannerAdd(),
             ],
           ),
         ),

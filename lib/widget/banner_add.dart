@@ -16,7 +16,7 @@ class _BannerAddState extends State<BannerAdd> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MyScreenSize().getScreenSize();
-    double smallAddHeight = screenSize.width / 5;
+    double smallAddHeight = screenSize.width * 0.21;
 
     return GestureDetector(
       // largeAds and smallAds taken from constants.dart
@@ -62,7 +62,7 @@ class _BannerAddState extends State<BannerAdd> {
           Container(
             color: backgroundColor,
             width: screenSize.width,
-            height: smallAddHeight, //smallAddHeight,
+            height: smallAddHeight,
             child:
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -84,7 +84,7 @@ class _BannerAddState extends State<BannerAdd> {
                   onTap: () {},
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    mainAxisSize: MainAxisSize.max,
+                    // mainAxisSize: MainAxisSize.max,
                     children: [
                       const SizedBox(width: 15),
                       smallAddFromIndex(0, smallAddHeight),
