@@ -74,20 +74,20 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                       ],
                     ),
                     const SizedBox(
-                      height: 10,
+                      height: 30,
                     ),
-                    const Center(
-                      child: Text(
-                        "User SignIn",
-                        style: TextStyle(
-                            fontSize: 26, fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    ),
+                    // const Center(
+                    //   child: Text(
+                    //     "User SignIn",
+                    //     style: TextStyle(
+                    //         fontSize: 26, fontWeight: FontWeight.w500),
+                    //   ),
+                    // ),
+                    // const SizedBox(
+                    //   height: 24,
+                    // ),
                     Container(
-                      height: screenSize.height * 0.5,
+                      height: screenSize.height * 0.58,
                       width: screenSize.width * 0.9,
                       padding:
                           const EdgeInsets.only(top: 22, left: 10, right: 10),
@@ -99,6 +99,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                         ),
                       ),
                       child: Column(
+                        // crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           // user name
                           SignInTextForm(
@@ -131,7 +132,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                             myIcon: const Icon(Icons.phone),
                           ),
                           const SizedBox(
-                            height: 25,
+                            height: 15,
                           ),
 
                           // address
@@ -142,27 +143,27 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                             myIcon: const Icon(Icons.location_on),
                           ),
                           const SizedBox(
-                            height: 25,
+                            height: 30,
+                          ),
+                          SizedBox(
+                            width: screenSize.width * 0.6,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.yellow),
+                              child: const Text(
+                                "Sign In",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              onPressed: () {
+                                login(context, phoneController.text.trim());
+                              },
+                            ),
                           ),
                         ],
                       ),
                     ),
                     const SizedBox(
-                      height: 15,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.yellow),
-                      child: const Text(
-                        "Sign In",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      onPressed: () {
-                        login(context, phoneController.text.trim());
-                      },
-                    ),
-                    const SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
                     Row(
                       children: [
@@ -263,7 +264,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                               // save the details
                               sp.phoneNumberUser(
                                 user,
-                                emailController.text,
+                                emailController.text.trim(),
                                 nameController.text,
                                 addressController.text,
                               );

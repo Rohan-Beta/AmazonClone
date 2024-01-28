@@ -74,7 +74,7 @@ class SignInProvider extends ChangeNotifier {
               _name = snapshot["name"],
               _email = snapshot["email"],
               _imageUrl = snapshot["imageUrl"],
-              _provider = snapshot["provoder"],
+              _provider = snapshot["provider"],
               _address = snapshot["address"],
             });
   }
@@ -91,7 +91,7 @@ class SignInProvider extends ChangeNotifier {
       "name": _name,
       "email": _email,
       "imageUrl": _imageUrl,
-      "privider": _provider,
+      "provider": _provider,
       "address": _address,
     });
     notifyListeners();

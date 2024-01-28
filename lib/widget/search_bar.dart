@@ -1,5 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:amazon/MyLayouts/screen_layout.dart';
 import 'package:amazon/Mythemes/color_theme.dart';
 import 'package:amazon/Mythemes/contants.dart';
+import 'package:amazon/screens/home_screen.dart';
+import 'package:amazon/screens/search_screen.dart';
+import 'package:amazon/utilss/next_screen.dart';
 import 'package:amazon/utilss/screen_size.dart';
 import 'package:flutter/material.dart';
 
@@ -34,12 +40,14 @@ class MySearchBar extends StatelessWidget implements PreferredSizeWidget {
               ? IconButton(
                   onPressed: () {
                     Navigator.pop(context);
+                    nextScreen(context, ScreenLayout());
                   },
-                  icon: const Icon(Icons.arrow_back),
+                  icon: const Icon(Icons.arrow_back_ios),
                 )
               : Container(),
           SizedBox(
             width: screenSise.width * 0.7,
+            height: 50,
             child: Container(
               decoration: BoxDecoration(
                 boxShadow: [
@@ -64,12 +72,7 @@ class MySearchBar extends StatelessWidget implements PreferredSizeWidget {
                 readOnly: isReadOnly,
                 onTap: () {
                   if (isReadOnly) {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const MySearchScreen(),
-                    //   ),
-                    // );
+                    nextScreen(context, SearchScreen());
                   }
                 },
                 decoration: InputDecoration(
@@ -91,7 +94,7 @@ class MySearchBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.mic),
+            icon: const Icon(Icons.mic_off_outlined),
           ),
         ],
       ),

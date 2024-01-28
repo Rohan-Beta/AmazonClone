@@ -18,14 +18,14 @@ class HorizontalCatalogView extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ResultScreen(
-                    query: categoriesList[index],
-                  ),
-                ),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => ResultScreen(
+              //       query: categoriesList[index],
+              //     ),
+              //   ),
+              // );
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
