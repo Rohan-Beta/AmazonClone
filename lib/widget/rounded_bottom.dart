@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-class RoundedButtom extends StatelessWidget {
+class RoundedButtom extends StatefulWidget {
   final VoidCallback onPressed;
   final String text;
 
@@ -13,9 +13,14 @@ class RoundedButtom extends StatelessWidget {
   });
 
   @override
+  State<RoundedButtom> createState() => _RoundedButtomState();
+}
+
+class _RoundedButtomState extends State<RoundedButtom> {
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPressed,
+      onTap: widget.onPressed,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         decoration: BoxDecoration(
@@ -23,7 +28,7 @@ class RoundedButtom extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
           border: Border.all(color: Colors.grey, width: 1),
         ),
-        child: Text(text),
+        child: Text(widget.text),
       ),
     );
   }

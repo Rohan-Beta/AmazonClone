@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-class SquareButtom extends StatelessWidget {
+class SquareButtom extends StatefulWidget {
   final Widget child;
   final VoidCallback onPressed;
   final Color color;
@@ -16,12 +16,17 @@ class SquareButtom extends StatelessWidget {
       required this.dimension});
 
   @override
+  State<SquareButtom> createState() => _SquareButtomState();
+}
+
+class _SquareButtomState extends State<SquareButtom> {
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPressed,
+      onTap: widget.onPressed,
       child: Container(
-        height: dimension,
-        width: dimension,
+        height: widget.dimension,
+        width: widget.dimension,
         // decoration: ShapeDecoration(
         //   shape: RoundedRectangleBorder(
         //     side: const BorderSide(
@@ -32,11 +37,11 @@ class SquareButtom extends StatelessWidget {
         //   ),
         // ),
         decoration: BoxDecoration(
-          color: color,
+          color: widget.color,
           borderRadius: BorderRadius.circular(5),
           border: Border.all(color: Colors.grey, width: 1),
         ),
-        child: child,
+        child: widget.child,
       ),
     );
   }

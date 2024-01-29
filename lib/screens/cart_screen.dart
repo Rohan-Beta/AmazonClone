@@ -3,9 +3,9 @@
 import 'package:amazon/Mythemes/color_theme.dart';
 import 'package:amazon/provider/sign_in_provider.dart';
 import 'package:amazon/utilss/screen_size.dart';
+import 'package:amazon/widget/cart_items.dart';
 import 'package:amazon/widget/search_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
@@ -39,63 +39,69 @@ class _CartScreenState extends State<CartScreen> {
     return Scaffold(
       appBar: MySearchBar(isReadOnly: true, hasBackButtom: false),
       body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: backgroundGradient,
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: backgroundGradient,
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                ),
+                width: screenSize.width,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 10, bottom: 4, top: 4),
+                      child: Icon(Icons.location_history_outlined),
+                    ),
+                    Text(
+                      "Deliver in - ${sp.address}",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
                 ),
               ),
-              width: screenSize.width,
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 20, right: 10, bottom: 4, top: 4),
-                    child: Icon(Icons.location_history_outlined),
+              CartItems(),
+              CartItems(),
+              CartItems(),
+              CartItems(),
+              Padding(
+                padding: const EdgeInsets.only(top: 20, bottom: 20),
+                child: RoundedLoadingButton(
+                  controller: cartController,
+                  successColor: Colors.yellow,
+                  color: Colors.yellow,
+                  width: screenSize.width * 0.4,
+                  onPressed: () {},
+                  child: Wrap(
+                    children: [
+                      Icon(
+                        Icons.shopping_cart,
+                        size: 20,
+                        color: Colors.black,
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Text(
+                        "Proceed to (n) items",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    "${sp.address}",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
+                ),
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            RoundedLoadingButton(
-              controller: cartController,
-              successColor: Colors.yellow,
-              color: Colors.yellow,
-              width: screenSize.width * 0.4,
-              onPressed: () {},
-              child: Wrap(
-                children: [
-                  Icon(
-                    Icons.shopping_cart,
-                    size: 20,
-                    color: Colors.black,
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    "Proceed to (n) items",
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
