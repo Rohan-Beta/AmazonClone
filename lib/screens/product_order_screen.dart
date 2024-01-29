@@ -1,5 +1,8 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
+import 'package:amazon/MyLayouts/screen_layout.dart';
+import 'package:amazon/Mythemes/color_theme.dart';
+import 'package:amazon/utilss/next_screen.dart';
 import 'package:amazon/utilss/screen_size.dart';
 import 'package:flutter/material.dart';
 
@@ -16,24 +19,41 @@ class _ProductOrderScreenState extends State<ProductOrderScreen> {
     Size screenSize = MyScreenSize().getScreenSize();
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: backgroundColor,
+        leading: IconButton(
+            onPressed: () {
+              nextScreen(context, ScreenLayout());
+            },
+            icon: Icon(Icons.arrow_back_ios)),
+        title: Text("Order Requests"),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                height: screenSize.height,
-                child: ListView.builder(
-                  itemCount: 20,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text("Order: Black Dress"),
-                      subtitle: Text("name , address"),
-                      trailing: IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.check),
-                      ),
-                    );
-                  },
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 10, left: 5, right: 2, bottom: 10),
+                child: Container(
+                  height: screenSize.height,
+                  child: ListView.builder(
+                    itemCount: 20,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(
+                          "Order: Black Dress",
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                        subtitle: Text("name , address"),
+                        trailing: IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.check),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               )
             ],
