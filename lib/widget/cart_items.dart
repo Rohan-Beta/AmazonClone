@@ -1,5 +1,6 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:amazon/MyModels/product_model.dart';
 import 'package:amazon/Mythemes/color_theme.dart';
 import 'package:amazon/utilss/screen_size.dart';
 import 'package:amazon/widget/product_info.dart';
@@ -8,7 +9,9 @@ import 'package:amazon/widget/sqare_bottom.dart';
 import 'package:flutter/material.dart';
 
 class CartItems extends StatefulWidget {
-  const CartItems({super.key});
+  final ProductModel product;
+
+  const CartItems({super.key, required this.product});
 
   @override
   State<CartItems> createState() => _CartItemsState();
@@ -55,8 +58,8 @@ class _CartItemsState extends State<CartItems> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10, right: 16),
                       child: Image.network(
-                        "https://m.media-amazon.com/images/I/11uufjN3lYL._SX90_SY90_.png",
-                        // product.url,
+                        // "https://m.media-amazon.com/images/I/11uufjN3lYL._SX90_SY90_.png",
+                        widget.product.url,
                         height: screenSize.height * 2,
                         width: screenSize.width * 2,
                       ),
@@ -70,9 +73,9 @@ class _CartItemsState extends State<CartItems> {
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: ProductInfo(
-                        productName: "Iphone 14",
-                        cost: 100,
-                        sellerName: "rohan",
+                        productName: widget.product.productName,
+                        cost: widget.product.cost,
+                        sellerName: widget.product.sellerName,
                       ),
                     ),
                   ],

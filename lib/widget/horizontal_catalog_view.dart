@@ -1,5 +1,4 @@
 import 'package:amazon/Mythemes/contants.dart';
-import 'package:amazon/screens/result_screen.dart';
 import 'package:flutter/material.dart';
 
 class HorizontalCatalogView extends StatelessWidget {
@@ -8,10 +7,9 @@ class HorizontalCatalogView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: kAppBarHeight, // kAppBarHeigh taken from constant.dart
+      height: kAppBarHeight,
       width: double.infinity,
       color: Colors.white,
-      // categoriesList and categoryLogos taken from constants.dart
       child: ListView.builder(
         itemCount: categoriesList.length,
         scrollDirection: Axis.horizontal,

@@ -4,6 +4,7 @@ import 'package:amazon/MyLayouts/screen_layout.dart';
 import 'package:amazon/Mythemes/color_theme.dart';
 import 'package:amazon/Mythemes/contants.dart';
 import 'package:amazon/screens/home_screen.dart';
+import 'package:amazon/screens/result_screen.dart';
 import 'package:amazon/screens/search_screen.dart';
 import 'package:amazon/utilss/next_screen.dart';
 import 'package:amazon/utilss/screen_size.dart';
@@ -61,13 +62,8 @@ class MySearchBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               child: TextField(
                 onSubmitted: (String query) {
-                  print("search ${query}");
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => MyResultScreen(query: query),
-                  //   ),
-                  // );
+                  // print("search ${query}");
+                  nextScreen(context, ResultScreen(query: query));
                 },
                 readOnly: isReadOnly,
                 onTap: () {

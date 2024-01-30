@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:amazon/MyModels/product_model.dart';
 import 'package:amazon/Mythemes/color_theme.dart';
 import 'package:amazon/provider/sign_in_provider.dart';
 import 'package:amazon/utilss/screen_size.dart';
@@ -66,10 +67,17 @@ class _CartScreenState extends State<CartScreen> {
                   ],
                 ),
               ),
-              CartItems(),
-              CartItems(),
-              CartItems(),
-              CartItems(),
+              CartItems(
+                product: ProductModel(
+                    "https://m.media-amazon.com/images/I/51QISbJp5-L._SX3000_.jpg",
+                    "Iphone",
+                    100,
+                    10,
+                    "123456789",
+                    "Rohan",
+                    "8017202787",
+                    4),
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 20, bottom: 20),
                 child: RoundedLoadingButton(

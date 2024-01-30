@@ -3,6 +3,7 @@ import 'package:amazon/provider/internet_provider.dart';
 import 'package:amazon/provider/sign_in_provider.dart';
 import 'package:amazon/screens/cart_screen.dart';
 import 'package:amazon/screens/more_screen.dart';
+import 'package:amazon/screens/result_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ class AmazonClone extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           body: SafeArea(
-            child: MoreScreen(),
+            child: ScreenLayout(),
           ),
         ),
       ),
