@@ -56,7 +56,7 @@ class _CartScreenState extends State<CartScreen> {
                     Padding(
                       padding: const EdgeInsets.only(
                           left: 20, right: 10, bottom: 4, top: 4),
-                      child: Icon(Icons.location_history_outlined),
+                      child: Icon(Icons.location_on_outlined),
                     ),
                     Text(
                       "Deliver in - ${sp.address}",
