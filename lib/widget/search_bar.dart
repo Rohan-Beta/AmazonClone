@@ -3,7 +3,6 @@
 import 'package:amazon/MyLayouts/screen_layout.dart';
 import 'package:amazon/Mythemes/color_theme.dart';
 import 'package:amazon/Mythemes/contants.dart';
-import 'package:amazon/screens/home_screen.dart';
 import 'package:amazon/screens/result_screen.dart';
 import 'package:amazon/screens/search_screen.dart';
 import 'package:amazon/utilss/next_screen.dart';

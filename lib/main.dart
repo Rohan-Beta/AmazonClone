@@ -1,8 +1,10 @@
 import 'package:amazon/MyLayouts/screen_layout.dart';
+import 'package:amazon/MyModels/product_model.dart';
 import 'package:amazon/provider/internet_provider.dart';
 import 'package:amazon/provider/sign_in_provider.dart';
 import 'package:amazon/screens/cart_screen.dart';
 import 'package:amazon/screens/more_screen.dart';
+import 'package:amazon/screens/product_detail_screen.dart';
 import 'package:amazon/screens/result_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -39,12 +41,22 @@ class AmazonClone extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => SignInProvider()),
         ChangeNotifierProvider(create: (context) => InternetProvider()),
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
         title: "Amazon Clone",
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           body: SafeArea(
-            child: ScreenLayout(),
+            child: ProductDetailScreen(
+              product: ProductModel(
+                  "https://m.media-amazon.com/images/I/51QISbJp5-L._SX3000_.jpg",
+                  "Iphone",
+                  100,
+                  10,
+                  "123456789",
+                  "Rohan",
+                  "8017202787",
+                  4),
+            ),
           ),
         ),
       ),
