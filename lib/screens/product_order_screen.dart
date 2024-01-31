@@ -35,27 +35,33 @@ class _ProductOrderScreenState extends State<ProductOrderScreen> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(
-                    top: 10, left: 5, right: 2, bottom: 10),
+                  top: 10,
+                  left: 5,
+                  right: 2,
+                ),
                 child: Container(
                   height: screenSize.height,
-                  child: ListView.builder(
-                    itemCount: 20,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(
-                          "Order: Black Dress",
-                          style: TextStyle(fontWeight: FontWeight.w500),
-                        ),
-                        subtitle: Text("name , address"),
-                        trailing: IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.check),
-                        ),
-                      );
-                    },
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 24),
+                    child: ListView.builder(
+                      itemCount: 20,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(
+                            "Order: Black Dress",
+                            style: TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                          subtitle: Text("name , address"),
+                          trailing: IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.check),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

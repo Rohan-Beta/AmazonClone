@@ -94,7 +94,7 @@ class _CartScreenState extends State<CartScreen> {
                         color: Colors.black,
                       ),
                       SizedBox(
-                        width: 15,
+                        width: 5,
                       ),
                       Text(
                         "Proceed to (n) items",

@@ -9,6 +9,7 @@ import 'package:amazon/utilss/next_screen.dart';
 import 'package:amazon/utilss/screen_size.dart';
 import 'package:amazon/widget/product_cost.dart';
 import 'package:amazon/widget/rating_star_widget.dart';
+import 'package:amazon/widget/review_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -140,6 +141,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     //         "Product will be delivered soon , continue your shopping");
                     //   },
                     // ),
+
                     // buy now
                     RoundedLoadingButton(
                       controller: buyController,
@@ -210,15 +212,23 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         // drop a review
 
                         SizedBox(
-                          width: screenSize.width * 0.3,
+                          width: 150,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.yellow),
                             child: const Text(
                               "Drop a review",
+                              maxLines: 1,
                               style: TextStyle(color: Colors.black),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return ReviewDialog();
+                                },
+                              );
+                            },
                           ),
                         ),
                         const SizedBox(
@@ -238,7 +248,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     const SizedBox(
                       height: 50,
                     ),
-                    // raing section
+                    // rating section
 
                     // Padding(
                     //   padding: const EdgeInsets.only(left: 15),

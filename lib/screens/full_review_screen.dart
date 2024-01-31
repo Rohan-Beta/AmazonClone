@@ -34,18 +34,22 @@ class _FullReviewScreenState extends State<FullReviewScreen> {
       ),
       body: SafeArea(
           child: SingleChildScrollView(
-        child: Container(
-          height: screenSize.height,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
-            child: ListView.builder(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: Container(
+            height: screenSize.height,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20, bottom: 75),
+              child: ListView.builder(
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   return ReviewWidget(
                     reviews: ProductReviewModel(
                         senderName: "Rohit", description: "Godd", rating: 4),
                   );
-                }),
+                },
+              ),
+            ),
           ),
         ),
       )),

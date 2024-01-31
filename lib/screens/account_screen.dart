@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, deprecated_member_use
 
+import 'package:amazon/MyModels/product_model.dart';
 import 'package:amazon/Mythemes/color_theme.dart';
 import 'package:amazon/provider/sign_in_provider.dart';
 import 'package:amazon/screens/login_screen.dart';
 import 'package:amazon/screens/product_order_screen.dart';
+import 'package:amazon/screens/sell_product_screen.dart';
 import 'package:amazon/utilss/next_screen.dart';
 import 'package:amazon/utilss/screen_size.dart';
 import 'package:amazon/widget/account_app_bar.dart';
@@ -157,7 +159,9 @@ class _AccountScreenState extends State<AccountScreen> {
                     successColor: Colors.yellow,
                     color: Colors.yellow,
                     width: screenSize.width * 0.4,
-                    onPressed: () {},
+                    onPressed: () {
+                      nextScreen(context, SellProductScreen());
+                    },
                     child: Wrap(
                       children: [
                         Icon(
@@ -186,20 +190,17 @@ class _AccountScreenState extends State<AccountScreen> {
                     title: "Your Orders",
                     children: [
                       SampleProduct(
-                          url:
-                              "https://m.media-amazon.com/images/I/51QISbJp5-L._SX3000_.jpg"),
-                      SampleProduct(
-                          url:
-                              "https://m.media-amazon.com/images/I/51QISbJp5-L._SX3000_.jpg"),
-                      SampleProduct(
-                          url:
-                              "https://m.media-amazon.com/images/I/51QISbJp5-L._SX3000_.jpg"),
-                      SampleProduct(
-                          url:
-                              "https://m.media-amazon.com/images/I/51QISbJp5-L._SX3000_.jpg"),
-                      SampleProduct(
-                          url:
-                              "https://m.media-amazon.com/images/I/51QISbJp5-L._SX3000_.jpg"),
+                        productModel: ProductModel(
+                          "https://m.media-amazon.com/images/I/51QISbJp5-L._SX3000_.jpg",
+                          "Iphone",
+                          100,
+                          10,
+                          "123456789",
+                          "Rohan",
+                          "8017202787",
+                          4,
+                        ),
+                      ),
                     ],
                   ),
                   SizedBox(

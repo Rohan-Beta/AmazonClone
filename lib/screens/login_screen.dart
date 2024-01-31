@@ -55,7 +55,7 @@ class _LogInScreenState extends State<LogInScreen> {
                       controller: phoneController,
                       successColor: Colors.yellow,
                       color: Colors.yellow,
-                      width: screenSize.width * 0.80,
+                      width: screenSize.width * 0.7,
                       onPressed: () {
                         nextScreen(context, const PhoneAuthScreen());
                         phoneController.reset();

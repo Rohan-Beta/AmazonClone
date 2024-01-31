@@ -42,6 +42,9 @@ class SignInProvider extends ChangeNotifier {
   String? _address;
   String? get address => _address;
 
+  String? _pincode;
+  String? get pincode => _pincode;
+
   SignInProvider() {
     checkSignInUser();
   }
@@ -76,6 +79,7 @@ class SignInProvider extends ChangeNotifier {
               _imageUrl = snapshot["imageUrl"],
               _provider = snapshot["provider"],
               _address = snapshot["address"],
+              _pincode = snapshot["pincode"],
             });
   }
 
@@ -93,6 +97,7 @@ class SignInProvider extends ChangeNotifier {
       "imageUrl": _imageUrl,
       "provider": _provider,
       "address": _address,
+      "pincode": _pincode,
     });
     notifyListeners();
   }
@@ -107,6 +112,7 @@ class SignInProvider extends ChangeNotifier {
     await s.setString("imageUrl", _imageUrl!);
     await s.setString("provider", _provider!);
     await s.setString("address", _address!);
+    await s.setString("pincode", _pincode!);
 
     notifyListeners();
   }
@@ -122,6 +128,7 @@ class SignInProvider extends ChangeNotifier {
     _imageUrl = s.getString("imageUrl");
     _provider = s.getString("provider");
     _address = s.getString("address");
+    _pincode = s.getString("pincode");
 
     notifyListeners();
   }
@@ -160,14 +167,18 @@ class SignInProvider extends ChangeNotifier {
     s.clear();
   }
 
-  void phoneNumberUser(User user, email, name, address) {
+// get details of user at the time of SignIn
+
+  void phoneNumberUser(User user, email, name, address, pincode) {
     _name = name;
     _email = email;
     _imageUrl =
         const Image(image: AssetImage("MyAssets/splashimage.png")).toString();
+
     _uid = user.phoneNumber;
     _provider = "PHONE";
     _address = address;
+    _pincode = pincode;
     notifyListeners();
   }
 }

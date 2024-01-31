@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:amazon/MyLayouts/screen_layout.dart';
 import 'package:amazon/Mythemes/color_theme.dart';
 import 'package:amazon/provider/internet_provider.dart';
 import 'package:amazon/provider/sign_in_provider.dart';
@@ -26,32 +27,34 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
-  TextEditingController otpCodeController = TextEditingController();
   TextEditingController addressController = TextEditingController();
+  TextEditingController pinCodeController = TextEditingController();
+  TextEditingController otpCodeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MyScreenSize().getScreenSize();
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Amazon Clone"),
+        backgroundColor: backgroundColor,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black45,
+          ),
+          onPressed: () {
+            nextScreenReplace(context, const LogInScreen());
+          },
+        ),
+      ),
       body: SafeArea(
         child: Scaffold(
-          appBar: AppBar(
-            title: const Text("Amazon Clone"),
-            backgroundColor: backgroundColor,
-            leading: IconButton(
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                color: Colors.black45,
-              ),
-              onPressed: () {
-                nextScreenReplace(context, const LogInScreen());
-              },
-            ),
-          ),
           body: SingleChildScrollView(
             child: Container(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.only(
+                  left: 20, right: 20, top: 20, bottom: 20),
               child: Form(
                 key: formKey,
                 child: Column(
@@ -66,6 +69,13 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                           height: 70,
                           width: 70,
                         ),
+                        Text(
+                          "User SignIN",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                         Image(
                           image: AssetImage("MyAssets/register2.png"),
                           height: 70,
@@ -76,18 +86,8 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                     const SizedBox(
                       height: 30,
                     ),
-                    // const Center(
-                    //   child: Text(
-                    //     "User SignIn",
-                    //     style: TextStyle(
-                    //         fontSize: 26, fontWeight: FontWeight.w500),
-                    //   ),
-                    // ),
-                    // const SizedBox(
-                    //   height: 24,
-                    // ),
                     Container(
-                      height: screenSize.height * 0.58,
+                      height: screenSize.height * 0.6,
                       width: screenSize.width * 0.9,
                       padding:
                           const EdgeInsets.only(top: 22, left: 10, right: 10),
@@ -143,10 +143,19 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                             myIcon: const Icon(Icons.location_on),
                           ),
                           const SizedBox(
+                            height: 15,
+                          ),
+                          SignInTextForm(
+                            myController: pinCodeController,
+                            myHintText: "enter your pincode",
+                            myText: "pincode can not be empty",
+                            myIcon: const Icon(Icons.person_pin_circle_rounded),
+                          ),
+                          const SizedBox(
                             height: 30,
                           ),
                           SizedBox(
-                            width: screenSize.width * 0.6,
+                            width: screenSize.width * 0.48,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.yellow),
@@ -163,7 +172,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 40,
                     ),
                     Row(
                       children: [
@@ -267,6 +276,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                                 emailController.text.trim(),
                                 nameController.text,
                                 addressController.text,
+                                pinCodeController.text,
                               );
 
                               // check user exists or not
@@ -291,7 +301,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                                       .then((value) =>
                                           sp.setSignIn().then((value) {
                                             nextScreenReplace(
-                                                context, const HomeScreen());
+                                                context, const ScreenLayout());
                                           })));
                                 }
                               });
