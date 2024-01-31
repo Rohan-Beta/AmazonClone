@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:amazon/MyLayouts/screen_layout.dart';
 import 'package:amazon/provider/sign_in_provider.dart';
 import 'package:amazon/screens/home_screen.dart';
 import 'package:amazon/screens/login_screen.dart';
@@ -23,7 +24,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
     Timer(const Duration(seconds: 2), () {
       sp.isSignedIn == false
           ? nextScreenReplace(context, const LogInScreen())
-          : nextScreenReplace(context, const HomeScreen());
+          : nextScreenReplace(context, const ScreenLayout());
     });
   }
 

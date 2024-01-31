@@ -225,7 +225,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return ReviewDialog();
+                                  return ReviewDialog(
+                                    productUid: widget.product.uid,
+                                  );
                                 },
                               );
                             },
@@ -248,42 +250,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     const SizedBox(
                       height: 50,
                     ),
-                    // rating section
-
-                    // Padding(
-                    //   padding: const EdgeInsets.only(left: 15),
-                    //   child: SizedBox(
-                    //     height: screenSize.height * 0.7,
-                    //     child: StreamBuilder(
-                    //       stream: FirebaseFirestore.instance
-                    //           .collection("products")
-                    //           .doc(widget.product.uid)
-                    //           .collection("reviews")
-                    //           .snapshots(),
-                    //       builder: (context, snapshot) {
-                    //         // ProductReviewModel models;
-                    //         if (snapshot.connectionState ==
-                    //             ConnectionState.waiting) {
-                    //           return Container();
-                    //         } else {
-                    //           return ListView.builder(
-                    //             itemCount: snapshot.data!.docs.length <= 4
-                    //                 ? snapshot.data!.docs.length
-                    //                 : snapshot.data!.docs.length -
-                    //                     (snapshot.data!.docs.length - 4),
-                    //             itemBuilder: (context, index) {
-                    //               ProductReviewModel model =
-                    //                   ProductReviewModel.getModelFromJson(
-                    //                       snapshot.data!.docs[index].data());
-                    //               return MyReview(reviews: model);
-                    //             },
-                    //           );
-                    //         }
-                    //         // return MyReview(reviews: models)
-                    //       },
-                    //     ),
-                    //   ),
-                    // ),
                     Container(
                       decoration: BoxDecoration(color: Colors.grey[400]!),
                       width: screenSize.width,
@@ -295,7 +261,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ],
                         ),
                         onPressed: () {
-                          nextScreen(context, FullReviewScreen());
+                          nextScreen(
+                            context,
+                            FullReviewScreen(productModel: widget.product),
+                          );
                         },
                       ),
                     ),

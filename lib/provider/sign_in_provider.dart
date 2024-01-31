@@ -1,7 +1,13 @@
 // ignore_for_file: await_only_futures, avoid_print, unnecessary_import, prefer_final_fields
 
+import 'dart:js_interop';
+
+import 'package:amazon/MyModels/product_model.dart';
+import 'package:amazon/MyModels/product_review_model.dart';
+import 'package:amazon/widget/sample_product.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,6 +16,7 @@ class SignInProvider extends ChangeNotifier {
   // instance for FirebaseAuth
 
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
   // sign in or not
 
@@ -180,5 +187,111 @@ class SignInProvider extends ChangeNotifier {
     _address = address;
     _pincode = pincode;
     notifyListeners();
+  }
+
+  // upload product name and cost to database
+
+  Future<String> uploadProductInfo({
+    required Uint8List? image,
+    required String productName,
+    required String
+        rawCost, // cost = rawcost - (rawcost * 0.5) for 50% discount
+    required String description,
+    required int discount,
+    required String sellerName,
+    required String sellerUid,
+  }) async {
+    productName.trim();
+    rawCost.trim();
+    String output = "Something went wrong";
+
+    if (image != null && productName != "" && rawCost != "") {
+      // function
+
+      try {
+        // await uploadProductImage(
+        //   image: image,
+        //   uid: _uid!,
+        // );
+        String url = await uploadProductImage(
+          image: image,
+          uid: _uid!,
+        );
+        double cost = double.parse(rawCost);
+        cost = cost - (cost * (discount / 100));
+
+        String uid = _uid!;
+
+        ProductModel product = ProductModel(
+          url,
+          productName,
+          cost,
+          discount,
+          uid,
+          sellerName,
+          sellerUid,
+          5,
+        );
+        await firebaseFirestore
+            .collection("products")
+            .doc(uid)
+            .set(product.getJson());
+
+        output = "success";
+      } catch (e) {
+        output = e.toString();
+      }
+    } else {
+      output = "Please fill up everything properly";
+    }
+    return output;
+  }
+  // upload product image to database
+
+  Future<String> uploadProductImage(
+      {required Uint8List image, required String uid}) async {
+    Reference storageRef = FirebaseStorage.instance // store images in folder
+        .ref()
+        .child("products") // storage or folder name
+        .child(uid);
+
+    UploadTask uploadTask = storageRef.putData(image);
+    TaskSnapshot taskSnap = await uploadTask;
+
+    return taskSnap.ref
+        .getDownloadURL(); // basically it download image url from database
+  }
+
+  // take snap of product info with respect to their discount
+
+  Future<List<Widget>> getProductDiscount(int discount) async {
+    List<Widget> children = [];
+
+    QuerySnapshot<Map<String, dynamic>> snap = await firebaseFirestore
+        .collection("products")
+        .where("discount", isEqualTo: discount)
+        .get();
+
+    for (int i = 0; i < snap.docs.length; i += 1) {
+      DocumentSnapshot docSnap = snap.docs[i];
+      ProductModel model =
+          ProductModel.getModelFromJson(docSnap.data() as dynamic);
+      children.add(
+        SampleProduct(productModel: model),
+      );
+    }
+    return children;
+  }
+
+  // upload reviews to database
+
+  Future uploadReviewInfo(
+      {required productUid, required ProductReviewModel reviewModel}) async {
+    await firebaseFirestore
+        .collection("products")
+        .doc(productUid)
+        .collection("reviews")
+        .add(reviewModel.getJson());
+    // await averageRating(productUid: productUid, reviewModel: reviewModel);
   }
 }

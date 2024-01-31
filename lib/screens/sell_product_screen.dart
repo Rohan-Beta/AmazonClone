@@ -1,13 +1,16 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
 import 'dart:typed_data';
 
 import 'package:amazon/MyLayouts/screen_layout.dart';
 import 'package:amazon/Mythemes/color_theme.dart';
+import 'package:amazon/provider/sign_in_provider.dart';
 import 'package:amazon/utilss/next_screen.dart';
 import 'package:amazon/utilss/screen_size.dart';
+import 'package:amazon/utilss/snack_bar.dart';
 import 'package:amazon/utilss/text_form.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SellProductScreen extends StatefulWidget {
   const SellProductScreen({super.key});
@@ -37,9 +40,21 @@ class _SellProductScreenState extends State<SellProductScreen> {
     costController.dispose();
   }
 
+  Future getData() async {
+    final sp = context.read<SignInProvider>();
+    sp.getDataFromSharedPreferences();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MyScreenSize().getScreenSize();
+    final sp = context.watch<SignInProvider>();
 
     return Scaffold(
       appBar: AppBar(
@@ -298,7 +313,26 @@ class _SellProductScreenState extends State<SellProductScreen> {
                                 "Sell",
                                 style: TextStyle(color: Colors.black),
                               ),
-                              onPressed: () {},
+                              onPressed: () async {
+                                String output = await sp.uploadProductInfo(
+                                  image: image,
+                                  productName: nameController.text,
+                                  rawCost: costController.text,
+                                  description: descriptionController.text,
+                                  discount: discountKeys[selected - 1],
+                                  sellerName: sp.name.toString(),
+                                  sellerUid: sp.uid.toString(),
+                                );
+
+                                if (output == "success") {
+                                  openSnackBar(
+                                      context,
+                                      "Product Uploaded Successfuly",
+                                      Colors.yellow);
+                                } else {
+                                  openSnackBar(context, output, Colors.red);
+                                }
+                              },
                             ),
                           ),
                         ],
