@@ -5,6 +5,7 @@ import 'package:amazon/MyModels/product_model.dart';
 import 'package:amazon/Mythemes/color_theme.dart';
 import 'package:amazon/Mythemes/contants.dart';
 import 'package:amazon/screens/full_review_screen.dart';
+import 'package:amazon/screens/product_description.dart';
 import 'package:amazon/utilss/next_screen.dart';
 import 'package:amazon/utilss/screen_size.dart';
 import 'package:amazon/widget/product_cost.dart';
@@ -237,7 +238,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           width: 100,
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            nextScreen(
+                              context,
+                              ProductDescription(
+                                productModel: widget.product,
+                              ),
+                            );
+                          },
                           child: const Row(
                             children: [
                               Text("details "),

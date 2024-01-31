@@ -1,7 +1,5 @@
 // ignore_for_file: await_only_futures, avoid_print, unnecessary_import, prefer_final_fields
 
-import 'dart:js_interop';
-
 import 'package:amazon/MyModels/product_model.dart';
 import 'package:amazon/MyModels/product_review_model.dart';
 import 'package:amazon/widget/sample_product.dart';
@@ -209,10 +207,6 @@ class SignInProvider extends ChangeNotifier {
       // function
 
       try {
-        // await uploadProductImage(
-        //   image: image,
-        //   uid: _uid!,
-        // );
         String url = await uploadProductImage(
           image: image,
           uid: _uid!,
@@ -231,6 +225,7 @@ class SignInProvider extends ChangeNotifier {
           sellerName,
           sellerUid,
           5,
+          description,
         );
         await firebaseFirestore
             .collection("products")

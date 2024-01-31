@@ -58,14 +58,16 @@ class _ResultScreenState extends State<ResultScreen> {
                   itemBuilder: (context, index) {
                     return ResultWidget(
                       product: ProductModel(
-                          "https://m.media-amazon.com/images/I/51QISbJp5-L._SX3000_.jpg",
-                          "Iphone",
-                          100,
-                          10,
-                          "123456789",
-                          "Rohan",
-                          "8017202787",
-                          4),
+                        "https://m.media-amazon.com/images/I/51QISbJp5-L._SX3000_.jpg",
+                        "Iphone",
+                        100,
+                        10,
+                        "123456789",
+                        "Rohan",
+                        "8017202787",
+                        4,
+                        "description of product",
+                      ),
                     );
                   }),
             ),

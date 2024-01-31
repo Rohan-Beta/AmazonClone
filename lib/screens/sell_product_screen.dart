@@ -24,12 +24,11 @@ class _SellProductScreenState extends State<SellProductScreen> {
   TextEditingController costController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
-  bool isLoading = false;
   int selected = 1;
   Uint8List? image;
-  Uint8List? image1;
-  Uint8List? image2;
-  Uint8List? image3;
+  // Uint8List? image1;
+  // Uint8List? image2;
+  // Uint8List? image3;
 
   List<int> discountKeys = [0, 70, 50, 30];
 
@@ -83,12 +82,13 @@ class _SellProductScreenState extends State<SellProductScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // first image
 
                         image == null
-                            ? SizedBox(
+                            ? Container(
+                                color: Colors.yellow,
                                 height: 70,
                                 width: 70,
                                 child: IconButton(
@@ -111,80 +111,80 @@ class _SellProductScreenState extends State<SellProductScreen> {
                                 child: Image.memory(image!),
                               ),
 
-                        // second image
-                        image1 == null
-                            ? SizedBox(
-                                height: 70,
-                                width: 70,
-                                child: IconButton(
-                                  icon: Icon(Icons.upload_outlined),
-                                  onPressed: () async {
-                                    Uint8List? temp =
-                                        await MyScreenSize().pickImage();
+                        // // second image
+                        // image1 == null
+                        //     ? SizedBox(
+                        //         height: 70,
+                        //         width: 70,
+                        //         child: IconButton(
+                        //           icon: Icon(Icons.upload_outlined),
+                        //           onPressed: () async {
+                        //             Uint8List? temp =
+                        //                 await MyScreenSize().pickImage();
 
-                                    if (temp != null) {
-                                      setState(() {
-                                        image1 = temp;
-                                      });
-                                    }
-                                  },
-                                ),
-                              )
-                            : SizedBox(
-                                height: 70,
-                                width: 70,
-                                child: Image.memory(image1!),
-                              ),
+                        //             if (temp != null) {
+                        //               setState(() {
+                        //                 image1 = temp;
+                        //               });
+                        //             }
+                        //           },
+                        //         ),
+                        //       )
+                        //     : SizedBox(
+                        //         height: 70,
+                        //         width: 70,
+                        //         child: Image.memory(image1!),
+                        //       ),
 
-                        // third image
-                        image2 == null
-                            ? SizedBox(
-                                height: 70,
-                                width: 70,
-                                child: IconButton(
-                                  icon: Icon(Icons.upload_outlined),
-                                  onPressed: () async {
-                                    Uint8List? temp =
-                                        await MyScreenSize().pickImage();
+                        // // third image
+                        // image2 == null
+                        //     ? SizedBox(
+                        //         height: 70,
+                        //         width: 70,
+                        //         child: IconButton(
+                        //           icon: Icon(Icons.upload_outlined),
+                        //           onPressed: () async {
+                        //             Uint8List? temp =
+                        //                 await MyScreenSize().pickImage();
 
-                                    if (temp != null) {
-                                      setState(() {
-                                        image2 = temp;
-                                      });
-                                    }
-                                  },
-                                ),
-                              )
-                            : SizedBox(
-                                height: 70,
-                                width: 70,
-                                child: Image.memory(image2!),
-                              ),
+                        //             if (temp != null) {
+                        //               setState(() {
+                        //                 image2 = temp;
+                        //               });
+                        //             }
+                        //           },
+                        //         ),
+                        //       )
+                        //     : SizedBox(
+                        //         height: 70,
+                        //         width: 70,
+                        //         child: Image.memory(image2!),
+                        //       ),
 
-                        // fourth image
-                        image3 == null
-                            ? SizedBox(
-                                height: 70,
-                                width: 70,
-                                child: IconButton(
-                                  icon: Icon(Icons.upload_outlined),
-                                  onPressed: () async {
-                                    Uint8List? temp =
-                                        await MyScreenSize().pickImage();
+                        // // fourth image
+                        // image3 == null
+                        //     ? SizedBox(
+                        //         height: 70,
+                        //         width: 70,
+                        //         child: IconButton(
+                        //           icon: Icon(Icons.upload_outlined),
+                        //           onPressed: () async {
+                        //             Uint8List? temp =
+                        //                 await MyScreenSize().pickImage();
 
-                                    if (temp != null) {
-                                      setState(() {
-                                        image3 = temp;
-                                      });
-                                    }
-                                  },
-                                ),
-                              )
-                            : SizedBox(
-                                height: 70,
-                                width: 70,
-                                child: Image.memory(image3!),
-                              ),
+                        //             if (temp != null) {
+                        //               setState(() {
+                        //                 image3 = temp;
+                        //               });
+                        //             }
+                        //           },
+                        //         ),
+                        //       )
+                        //     : SizedBox(
+                        //         height: 70,
+                        //         width: 70,
+                        //         child: Image.memory(image3!),
+                        //       ),
                       ],
                     ),
                     const SizedBox(

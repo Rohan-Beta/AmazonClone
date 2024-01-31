@@ -9,6 +9,7 @@ class ProductModel {
   final String sellerName;
   final String sellerUid;
   final int rating;
+  final String description;
 
   ProductModel(
     this.url,
@@ -19,6 +20,7 @@ class ProductModel {
     this.sellerName,
     this.sellerUid,
     this.rating,
+    this.description,
   );
   Map<String, dynamic> getJson() {
     return {
@@ -30,6 +32,7 @@ class ProductModel {
       "sellerName": sellerName,
       "sellerUid": sellerUid,
       "rating": rating,
+      "description": description,
     };
   }
 
@@ -43,6 +46,7 @@ class ProductModel {
       json["sellerName"],
       json["sellerUid"],
       json["rating"],
+      json["description"],
     );
   }
 }
