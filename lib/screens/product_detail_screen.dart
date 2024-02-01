@@ -1,19 +1,21 @@
-// ignore_for_file: use_build_context_synchronously, sized_box_for_whitespace, prefer_const_constructors
+// ignore_for_file: use_build_context_synchronously, sized_box_for_whitespace, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:amazon/MyLayouts/screen_layout.dart';
 import 'package:amazon/MyModels/product_model.dart';
 import 'package:amazon/Mythemes/color_theme.dart';
 import 'package:amazon/Mythemes/contants.dart';
+import 'package:amazon/provider/sign_in_provider.dart';
 import 'package:amazon/screens/full_review_screen.dart';
 import 'package:amazon/screens/product_description.dart';
 import 'package:amazon/utilss/next_screen.dart';
 import 'package:amazon/utilss/screen_size.dart';
+import 'package:amazon/utilss/snack_bar.dart';
 import 'package:amazon/widget/product_cost.dart';
 import 'package:amazon/widget/rating_star_widget.dart';
 import 'package:amazon/widget/review_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:rounded_loading_button/rounded_loading_button.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final ProductModel product;
@@ -25,14 +27,21 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  RoundedLoadingButtonController buyController =
-      RoundedLoadingButtonController();
-  RoundedLoadingButtonController addToCartController =
-      RoundedLoadingButtonController();
+  Future getData() async {
+    final sp = context.read<SignInProvider>();
+    sp.getDataFromSharedPreferences();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MyScreenSize().getScreenSize();
+    final sp = context.watch<SignInProvider>();
 
     return Scaffold(
       appBar: AppBar(
@@ -44,12 +53,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             color: Colors.black45,
           ),
           onPressed: () {
-            nextScreenReplace(context, const ScreenLayout());
+            Navigator.pop(context);
           },
         ),
       ),
       body: SafeArea(
-        // appBar: const MySearchBar(isReadOnly: true, hasBackButtom: true),
         child: Stack(
           children: [
             SingleChildScrollView(
@@ -121,92 +129,88 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ],
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 40,
                     ),
-                    // SignInButtom(
-                    //   child: const Text(
-                    //     "Buy",
-                    //     style: TextStyle(color: Colors.black),
-                    //   ),
-                    //   color: Colors.orange,
-                    //   isLoading: false,
-                    //   onPressed: () async {
-                    // await MyFireStore().addProductToOrder(
-                    //     model: widget.product,
-                    //     userInfo: Provider.of<UserDetailsProvider>(context,
-                    //             listen: false)
-                    //         .userDetails);
-                    // MyScreenSize().showSnakBar(
-                    //     context: context,
-                    //     content:
-                    //         "Product will be delivered soon , continue your shopping");
-                    //   },
-                    // ),
 
                     // buy now
-                    RoundedLoadingButton(
-                      controller: buyController,
-                      successColor: Colors.orange,
-                      color: Colors.orange,
-                      width: screenSize.width * 0.44,
-                      onPressed: () {},
-                      child: const Wrap(
-                        children: [
-                          Icon(
-                            FontAwesomeIcons.dollarSign,
-                            size: 20,
-                            color: Colors.black,
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Text(
-                            "Buy Now",
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
+
+                    SizedBox(
+                      height: 40,
+                      width: 190,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.orange),
+                        onPressed: () async {
+                          await sp.addProductToOrder(model: widget.product);
+                          openSnackBar(
+                              context, "Will be delivered soon", Colors.yellow);
+                          nextScreen(context, ScreenLayout());
+                        },
+                        child: Wrap(
+                          children: [
+                            Icon(
+                              FontAwesomeIcons.dollarSign,
+                              size: 20,
                               color: Colors.black,
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Text(
+                              "Buy now",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
+
                     // add to cart
 
-                    RoundedLoadingButton(
-                      controller: addToCartController,
-                      successColor: Colors.yellow,
-                      color: Colors.yellow,
-                      width: screenSize.width * 0.44,
-                      onPressed: () {},
-                      child: const Wrap(
-                        children: [
-                          Icon(
-                            FontAwesomeIcons.cartShopping,
-                            size: 20,
-                            color: Colors.black,
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Text(
-                            "Add to cart",
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
+                    SizedBox(
+                      height: 40,
+                      width: 190,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.yellow),
+                        onPressed: () async {
+                          await sp.addProductToCart(
+                              productModel: widget.product);
+                          openSnackBar(
+                              context, "Item added to cart", Colors.yellow);
+                        },
+                        child: Wrap(
+                          children: [
+                            Icon(
+                              Icons.shopping_cart_outlined,
+                              size: 20,
                               color: Colors.black,
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Text(
+                              "Add to cart",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     const SizedBox(
-                      height: 30,
+                      height: 60,
                     ),
-                    // RoundedButtom(onPressed: () {}, text: "Add a review"),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [

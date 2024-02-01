@@ -2,6 +2,7 @@
 
 import 'package:amazon/MyModels/product_model.dart';
 import 'package:amazon/Mythemes/color_theme.dart';
+import 'package:amazon/provider/sign_in_provider.dart';
 import 'package:amazon/screens/product_detail_screen.dart';
 import 'package:amazon/utilss/next_screen.dart';
 import 'package:amazon/utilss/screen_size.dart';
@@ -107,7 +108,21 @@ class _CartItemsState extends State<CartItems> {
                 ),
                 SquareButtom(
                     child: const Icon(Icons.add),
-                    onPressed: () async {},
+                    onPressed: () async {
+                      await SignInProvider().addProductToCart(
+                        productModel: ProductModel(
+                          widget.product.url,
+                          widget.product.productName,
+                          widget.product.cost,
+                          widget.product.discount,
+                          MyScreenSize().getUid(),
+                          widget.product.sellerName,
+                          widget.product.sellerUid,
+                          widget.product.rating,
+                          widget.product.description,
+                        ),
+                      );
+                    },
                     color: Colors.transparent,
                     dimension: 40),
               ],
@@ -129,7 +144,12 @@ class _CartItemsState extends State<CartItems> {
                       const SizedBox(
                         width: 6,
                       ),
-                      RoundedButtom(onPressed: () async {}, text: "Delete"),
+                      RoundedButtom(
+                          onPressed: () async {
+                            await SignInProvider()
+                                .deleteCartProduct(uid: widget.product.uid);
+                          },
+                          text: "Delete"),
                       const SizedBox(
                         width: 7,
                       ),

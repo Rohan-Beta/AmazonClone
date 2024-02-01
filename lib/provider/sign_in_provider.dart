@@ -1,7 +1,10 @@
 // ignore_for_file: await_only_futures, avoid_print, unnecessary_import, prefer_final_fields
 
+import 'package:amazon/MyModel/user_info_model.dart';
+import 'package:amazon/MyModels/order_request_model.dart';
 import 'package:amazon/MyModels/product_model.dart';
 import 'package:amazon/MyModels/product_review_model.dart';
+import 'package:amazon/utilss/screen_size.dart';
 import 'package:amazon/widget/sample_product.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -214,7 +217,7 @@ class SignInProvider extends ChangeNotifier {
         double cost = double.parse(rawCost);
         cost = cost - (cost * (discount / 100));
 
-        String uid = _uid!;
+        String uid = MyScreenSize().getUid();
 
         ProductModel product = ProductModel(
           url,
@@ -289,4 +292,83 @@ class SignInProvider extends ChangeNotifier {
         .add(reviewModel.getJson());
     // await averageRating(productUid: productUid, reviewModel: reviewModel);
   }
+
+  // add cart product
+
+  Future addProductToCart({required ProductModel productModel}) async {
+    await firebaseFirestore
+        .collection("users")
+        .doc(firebaseAuth.currentUser!.uid)
+        .collection("cart")
+        .doc(productModel.uid)
+        .set(productModel.getJson());
+  }
+
+  // delete product from cart
+
+  Future deleteCartProduct({required String uid}) async {
+    await firebaseFirestore
+        .collection("users")
+        .doc(firebaseAuth.currentUser!.uid)
+        .collection("cart")
+        .doc(uid)
+        .delete();
+  }
+
+  // buy products from cart or from main screen
+
+  Future buyAllProductsInCarts(
+      // { required UserInfoModel userInfo}
+      ) async {
+    QuerySnapshot<Map<String, dynamic>> snapshot = await firebaseFirestore
+        .collection("users")
+        .doc(firebaseAuth.currentUser!.uid)
+        .collection("cart")
+        .get();
+
+    for (int i = 0; i < snapshot.docs.length; i += 1) {
+      ProductModel model =
+          ProductModel.getModelFromJson(snapshot.docs[i].data());
+      // UserInfoModel userInfoModel =
+      //     UserInfoModel.getModelFromJson(snapshot.docs[i].data());
+
+      addProductToOrder(
+        model: model,
+        // userInfo: userInfo
+      );
+      await deleteCartProduct(uid: model.uid);
+    }
+  }
+
+  // add product to order in account section
+  // purchase the order or product
+
+  Future addProductToOrder({
+    required ProductModel model,
+    // required UserInfoModel userInfo,
+  }) async {
+    await firebaseFirestore
+        .collection("users")
+        .doc(firebaseAuth.currentUser!.uid)
+        .collection("orders")
+        .add(model.getJson());
+    // await getOrderRequest(model: model, userInfo: userInfo);
+  }
+
+  // Future getOrderRequest({
+  //   required ProductModel model,
+  //   required UserInfoModel userInfo,
+  // }) async {
+  //   OrderRequestModel orderRequestModel = OrderRequestModel(
+  //     model.productName,
+  //     userInfo.address,
+  //     userInfo.uid,
+  //     userInfo.name,
+  //   );
+  //   await firebaseFirestore
+  //       .collection("users")
+  //       .doc(model.sellerUid)
+  //       .collection("orderRequest")
+  //       .add(orderRequestModel.getJson());
+  // }
 }

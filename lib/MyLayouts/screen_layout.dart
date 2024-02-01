@@ -1,5 +1,6 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
+import 'package:amazon/MyModel/user_info_model.dart';
 import 'package:amazon/Mythemes/color_theme.dart';
 import 'package:amazon/screens/account_screen.dart';
 import 'package:amazon/screens/cart_screen.dart';

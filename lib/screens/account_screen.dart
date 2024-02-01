@@ -11,6 +11,8 @@ import 'package:amazon/utilss/screen_size.dart';
 import 'package:amazon/widget/account_app_bar.dart';
 import 'package:amazon/widget/product_view.dart';
 import 'package:amazon/widget/sample_product.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -186,23 +188,47 @@ class _AccountScreenState extends State<AccountScreen> {
                   SizedBox(
                     height: 26,
                   ),
-                  ProductsView(
-                    title: "Your Orders",
-                    children: [
-                      SampleProduct(
-                        productModel: ProductModel(
-                            "https://m.media-amazon.com/images/I/51QISbJp5-L._SX3000_.jpg",
-                            "Iphone",
-                            100,
-                            10,
-                            "123456789",
-                            "Rohan",
-                            "8017202787",
-                            4,
-                            "description"),
-                      ),
-                    ],
+                  FutureBuilder(
+                    future: FirebaseFirestore.instance
+                        .collection("users")
+                        .doc(FirebaseAuth.instance.currentUser!.uid)
+                        .collection("orders")
+                        .get(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Container();
+                      } else {
+                        List<Widget> children = [];
+
+                        for (int i = 0;
+                            i < snapshot.data!.docs.length;
+                            i += 1) {
+                          ProductModel model = ProductModel.getModelFromJson(
+                              snapshot.data!.docs[i].data());
+                          children.add(SampleProduct(productModel: model));
+                        }
+                        return ProductsView(
+                            title: "Your Orders", children: children);
+                      }
+                    },
                   ),
+                  // ProductsView(
+                  //   title: "Your Orders",
+                  //   children: [
+                  //     SampleProduct(
+                  //       productModel: ProductModel(
+                  //           "https://m.media-amazon.com/images/I/51QISbJp5-L._SX3000_.jpg",
+                  //           "Iphone",
+                  //           100,
+                  //           10,
+                  //           "123456789",
+                  //           "Rohan",
+                  //           "8017202787",
+                  //           4,
+                  //           "description"),
+                  //     ),
+                  //   ],
+                  // ),
                   SizedBox(
                     height: 10,
                   ),

@@ -30,7 +30,7 @@ class _FullReviewScreenState extends State<FullReviewScreen> {
         centerTitle: true,
         leading: IconButton(
             onPressed: () {
-              nextScreen(context, ScreenLayout());
+              Navigator.pop(context);
             },
             icon: Icon(Icons.arrow_back_ios)),
       ),
