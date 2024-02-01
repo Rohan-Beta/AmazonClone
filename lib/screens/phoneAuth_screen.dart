@@ -87,7 +87,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                       height: 30,
                     ),
                     Container(
-                      height: screenSize.height * 0.6,
+                      height: screenSize.height * 0.64,
                       width: screenSize.width * 0.9,
                       padding:
                           const EdgeInsets.only(top: 22, left: 10, right: 10),

@@ -151,7 +151,11 @@ class _CartScreenState extends State<CartScreen> {
                           color: Colors.yellow,
                           width: 150,
                           onPressed: () async {
-                            await SignInProvider().buyAllProductsInCarts();
+                            await SignInProvider().buyAllProductsInCarts(
+                              userInfo: UserInfoModel(
+                                  sp.name!, sp.address!, sp.uid!, sp.pincode!),
+                            );
+
                             openSnackBar(context, "thank you for purchasing",
                                 Colors.yellow);
                             nextScreen(

@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:amazon/MyModels/product_model.dart';
+import 'package:amazon/screens/product_detail_screen.dart';
+import 'package:amazon/utilss/next_screen.dart';
 import 'package:amazon/utilss/screen_size.dart';
 import 'package:amazon/widget/product_cost.dart';
 import 'package:amazon/widget/rating_star_widget.dart';
@@ -21,11 +23,7 @@ class _ResultWidgetState extends State<ResultWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //       builder: (context) => ProductDetailScreen(product: product)),
-        // );
+        nextScreen(context, ProductDetailScreen(product: widget.product));
       },
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10),

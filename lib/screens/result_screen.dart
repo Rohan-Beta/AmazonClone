@@ -3,6 +3,7 @@
 import 'package:amazon/MyModels/product_model.dart';
 import 'package:amazon/widget/result_screen_widget.dart';
 import 'package:amazon/widget/search_bar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ResultScreen extends StatefulWidget {
@@ -51,25 +52,31 @@ class _ResultScreenState extends State<ResultScreen> {
               ),
             ),
             Expanded(
-              child: GridView.builder(
-                  itemCount: 9,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3),
-                  itemBuilder: (context, index) {
-                    return ResultWidget(
-                      product: ProductModel(
-                        "https://m.media-amazon.com/images/I/51QISbJp5-L._SX3000_.jpg",
-                        "Iphone",
-                        100,
-                        10,
-                        "123456789",
-                        "Rohan",
-                        "8017202787",
-                        4,
-                        "description of product",
-                      ),
+              child: FutureBuilder(
+                future: FirebaseFirestore.instance
+                    .collection("products")
+                    .where("productName", isEqualTo: widget.query)
+                    .get(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Container();
+                  } else {
+                    return GridView.builder(
+                      itemCount: snapshot.data!.docs.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3, childAspectRatio: 2 / 3.5),
+                      itemBuilder: (context, index) {
+                        ProductModel productModel =
+                            ProductModel.getModelFromJson(
+                                snapshot.data!.docs[index].data());
+                        return ResultWidget(
+                          product: productModel,
+                        );
+                      },
                     );
-                  }),
+                  }
+                },
+              ),
             ),
           ],
         ),

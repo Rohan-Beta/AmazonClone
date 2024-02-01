@@ -16,18 +16,21 @@ class _MoreScreenState extends State<MoreScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              childAspectRatio: 2.2 / 3.5,
-              mainAxisSpacing: 20,
+        child: GestureDetector(
+          onTap: () {},
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                childAspectRatio: 2.2 / 3.5,
+                mainAxisSpacing: 20,
+              ),
+              itemCount: categoriesList.length,
+              itemBuilder: (context, index) {
+                return CategoryProductMoreScreen(index: index);
+              },
             ),
-            itemCount: categoriesList.length,
-            itemBuilder: (context, index) {
-              return CategoryProductMoreScreen(index: index);
-            },
           ),
         ),
       ),

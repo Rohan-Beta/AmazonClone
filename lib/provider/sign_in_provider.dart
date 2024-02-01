@@ -1,4 +1,4 @@
-// ignore_for_file: await_only_futures, avoid_print, unnecessary_import, prefer_final_fields
+// ignore_for_file: await_only_futures, avoid_print, unnecessary_import, prefer_final_fields, division_optimization
 
 import 'package:amazon/MyModel/user_info_model.dart';
 import 'package:amazon/MyModels/order_request_model.dart';
@@ -290,7 +290,26 @@ class SignInProvider extends ChangeNotifier {
         .doc(productUid)
         .collection("reviews")
         .add(reviewModel.getJson());
-    // await averageRating(productUid: productUid, reviewModel: reviewModel);
+    await averageRating(productUid: productUid, reviewModel: reviewModel);
+  }
+  // get the average rating of product
+
+  Future averageRating(
+      {required String productUid,
+      required ProductReviewModel reviewModel}) async {
+    DocumentSnapshot snapshot =
+        await firebaseFirestore.collection("products").doc(productUid).get();
+
+    ProductModel model =
+        ProductModel.getModelFromJson((snapshot.data() as dynamic));
+
+    int currentRating = model.rating;
+    int newRating = ((currentRating + reviewModel.rating) / 2).toInt();
+
+    await firebaseFirestore
+        .collection("products")
+        .doc(productUid)
+        .update({"rating": newRating});
   }
 
   // add cart product
@@ -317,9 +336,7 @@ class SignInProvider extends ChangeNotifier {
 
   // buy products from cart or from main screen
 
-  Future buyAllProductsInCarts(
-      // { required UserInfoModel userInfo}
-      ) async {
+  Future buyAllProductsInCarts({required UserInfoModel userInfo}) async {
     QuerySnapshot<Map<String, dynamic>> snapshot = await firebaseFirestore
         .collection("users")
         .doc(firebaseAuth.currentUser!.uid)
@@ -329,13 +346,8 @@ class SignInProvider extends ChangeNotifier {
     for (int i = 0; i < snapshot.docs.length; i += 1) {
       ProductModel model =
           ProductModel.getModelFromJson(snapshot.docs[i].data());
-      // UserInfoModel userInfoModel =
-      //     UserInfoModel.getModelFromJson(snapshot.docs[i].data());
 
-      addProductToOrder(
-        model: model,
-        // userInfo: userInfo
-      );
+      addProductToOrder(model: model, userInfo: userInfo);
       await deleteCartProduct(uid: model.uid);
     }
   }
@@ -345,30 +357,45 @@ class SignInProvider extends ChangeNotifier {
 
   Future addProductToOrder({
     required ProductModel model,
-    // required UserInfoModel userInfo,
+    required UserInfoModel userInfo,
   }) async {
     await firebaseFirestore
         .collection("users")
         .doc(firebaseAuth.currentUser!.uid)
         .collection("orders")
         .add(model.getJson());
-    // await getOrderRequest(model: model, userInfo: userInfo);
+    await getOrderRequest(model: model, userInfo: userInfo
+        // name: _name!,
+        // address: _address!,
+        // mobile: _uid!,
+        // pincode: _pincode!,
+        );
   }
+  // get order request from buyer
 
-  // Future getOrderRequest({
-  //   required ProductModel model,
-  //   required UserInfoModel userInfo,
-  // }) async {
-  //   OrderRequestModel orderRequestModel = OrderRequestModel(
-  //     model.productName,
-  //     userInfo.address,
-  //     userInfo.uid,
-  //     userInfo.name,
-  //   );
-  //   await firebaseFirestore
-  //       .collection("users")
-  //       .doc(model.sellerUid)
-  //       .collection("orderRequest")
-  //       .add(orderRequestModel.getJson());
-  // }
+  Future getOrderRequest({
+    required ProductModel model,
+    required UserInfoModel userInfo,
+    // required String name,
+    // required String address,
+    // required String mobile,
+    // required String pincode,
+  }) async {
+    OrderRequestModel orderRequestModel = OrderRequestModel(
+      model.productName,
+      userInfo.name,
+      userInfo.address,
+      userInfo.uid,
+      userInfo.pincode,
+      // name,
+      // address,
+      // mobile,
+      // pincode,
+    );
+    await firebaseFirestore
+        .collection("users")
+        .doc(model.sellerUid)
+        .collection("orderRequest")
+        .add(orderRequestModel.getJson());
+  }
 }
