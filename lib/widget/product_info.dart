@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class ProductInfo extends StatefulWidget {
   final String productName;
-  final double cost;
+  final num cost;
   final String sellerName;
 
   const ProductInfo(

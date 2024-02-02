@@ -1,9 +1,7 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
 
-import 'package:amazon/MyLayouts/screen_layout.dart';
 import 'package:amazon/MyModels/product_model.dart';
 import 'package:amazon/MyModels/product_review_model.dart';
-import 'package:amazon/utilss/next_screen.dart';
 import 'package:amazon/utilss/screen_size.dart';
 import 'package:amazon/widget/review_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

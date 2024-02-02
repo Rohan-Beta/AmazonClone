@@ -1,9 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:amazon/MyLayouts/screen_layout.dart';
 import 'package:amazon/provider/internet_provider.dart';
 import 'package:amazon/provider/sign_in_provider.dart';
-import 'package:amazon/screens/sell_product_screen.dart';
 import 'package:amazon/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';

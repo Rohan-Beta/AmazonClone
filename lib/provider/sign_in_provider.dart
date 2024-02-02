@@ -262,7 +262,7 @@ class SignInProvider extends ChangeNotifier {
 
   // take snap of product info with respect to their discount
 
-  Future<List<Widget>> getProductDiscount(int discount) async {
+  Future<List<Widget>> getProductDiscount(num discount) async {
     List<Widget> children = [];
 
     QuerySnapshot<Map<String, dynamic>> snap = await firebaseFirestore
@@ -383,9 +383,9 @@ class SignInProvider extends ChangeNotifier {
   }) async {
     OrderRequestModel orderRequestModel = OrderRequestModel(
       model.productName,
-      userInfo.name,
       userInfo.address,
       userInfo.uid,
+      userInfo.name,
       userInfo.pincode,
       // name,
       // address,

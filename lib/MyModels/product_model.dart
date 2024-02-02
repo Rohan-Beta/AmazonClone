@@ -3,8 +3,8 @@
 class ProductModel {
   final String url;
   final String productName;
-  final double cost;
-  final int discount;
+  final num cost;
+  final num discount;
   final String uid;
   final String sellerName;
   final String sellerUid;

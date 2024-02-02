@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:amazon/MyLayouts/screen_layout.dart';
 import 'package:amazon/provider/sign_in_provider.dart';
-import 'package:amazon/screens/home_screen.dart';
 import 'package:amazon/screens/login_screen.dart';
 import 'package:amazon/utilss/next_screen.dart';
 import 'package:flutter/material.dart';

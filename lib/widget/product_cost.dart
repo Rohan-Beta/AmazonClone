@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class ProductCost extends StatefulWidget {
   final Color color;
-  final double cost;
+  final num cost;
 
   const ProductCost({super.key, required this.color, required this.cost});
 
