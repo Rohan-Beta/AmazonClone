@@ -1,9 +1,9 @@
 // ignore_for_file: await_only_futures, avoid_print, unnecessary_import, prefer_final_fields, division_optimization
 
-import 'package:amazon/MyModel/user_info_model.dart';
 import 'package:amazon/MyModels/order_request_model.dart';
 import 'package:amazon/MyModels/product_model.dart';
 import 'package:amazon/MyModels/product_review_model.dart';
+import 'package:amazon/MyModels/user_info_model.dart';
 import 'package:amazon/utilss/screen_size.dart';
 import 'package:amazon/widget/sample_product.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

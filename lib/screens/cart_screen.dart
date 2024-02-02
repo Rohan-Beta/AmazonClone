@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously
 
 import 'package:amazon/MyLayouts/screen_layout.dart';
-import 'package:amazon/MyModel/user_info_model.dart';
 import 'package:amazon/MyModels/product_model.dart';
+import 'package:amazon/MyModels/user_info_model.dart';
 import 'package:amazon/Mythemes/color_theme.dart';
 import 'package:amazon/provider/sign_in_provider.dart';
 import 'package:amazon/utilss/next_screen.dart';
