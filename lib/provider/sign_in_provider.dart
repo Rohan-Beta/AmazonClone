@@ -212,7 +212,8 @@ class SignInProvider extends ChangeNotifier {
       try {
         String url = await uploadProductImage(
           image: image,
-          uid: _uid!,
+          // uid: _uid!,
+          uid: MyScreenSize().getUid(),
         );
         double cost = double.parse(rawCost);
         cost = cost - (cost * (discount / 100));

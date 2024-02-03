@@ -329,6 +329,8 @@ class _SellProductScreenState extends State<SellProductScreen> {
                                       context,
                                       "Product Uploaded Successfuly",
                                       Colors.yellow);
+
+                                  nextScreen(context, ScreenLayout());
                                 } else {
                                   openSnackBar(context, output, Colors.red);
                                 }
