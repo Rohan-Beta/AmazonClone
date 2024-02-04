@@ -4,13 +4,13 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Create an AmazonClone app that allows user by using phone authentication and firebase for data management
 
-A few resources to get you started if this is your first Flutter project:
+## Data Store
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Store realtime data in firebase
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## provider
+
+create two types of provider for(sign_in_provider.dart and internet_provider.dart to check connection and to store and retrive data from firebase)
+
